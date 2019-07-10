@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibmlraTEyc3RlcCIsImEiOiJjanZlNGFneWswMm0zNDRxc
 
 var map = new mapboxgl.Map({
   container: 'map', // container id
-  style: 'mapbox://styles/niki12step/cjxw7tcya0lqp1csh0grzesco' // my style url
+  style: 'mapbox://styles/niki12step/cjxxnbwac028n1cpqdezd3di8' // my style url
 })
 
 map.on('load', function() {
@@ -31,7 +31,7 @@ map.on('load', function() {
 
   map.on('mousemove', function(e) {
     var EDs = map.queryRenderedFeatures(e.point, {
-      layers: ['queensdaprimaryresults-4xlk0u']
+      layers: ['queensdaprimaryresults-7mwwf1']
     });
 
     if (EDs.length > 0) {
