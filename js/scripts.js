@@ -1,19 +1,31 @@
+// accessToken
 mapboxgl.accessToken = 'pk.eyJ1IjoibmlraTEyc3RlcCIsImEiOiJjanZlNGFneWswMm0zNDRxcGYwZXYwcjl2In0.fWV3JfWN5hg9UFqDimwIZw';
 
+// adding mapbox map container
 var map = new mapboxgl.Map({
   container: 'map', // container id
   style: 'mapbox://styles/niki12step/cjy06zjb90m111cplccxmln9m', // my style url
+  zoom: 10.3,
+  minZoom: 8,
+  maxZoom: 15,
+  center: [-73.832966,40.694523],
 })
 
+// adding zoom and panning control
+var nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-left');
+
+// source geojson hosted on github
+var sourceUrl = 'https://raw.githubusercontent.com/nikikokkinos/Data/master/QueensDAPrimaryResults.geojson';
+
+// functions to be performed on load
 map.on('load', function() {
-  // the rest of the code will go in here
+
   map.getCanvas().style.cursor = 'default';
-  map.fitBounds([[-74.235539,40.488127],[-73.394398,40.869824]]);
-
-  var sourceUrl = 'https://raw.githubusercontent.com/nikikokkinos/Data/master/QueensDAPrimaryResults.geojson';
-
-  map.addLayer({
-    'id': 'Percentage of Vote for Tiffany Caban',
+  
+  // tiffanyCaban style layer
+  var tiffanyLayer = map.addLayer({
+    'id': 'Caban',
     'type': 'fill',
     'source': {
       'type': 'geojson',
@@ -34,8 +46,9 @@ map.on('load', function() {
     },
   });
 
-  map.addLayer({
-    'id': 'Percentage of Vote for Melinda Katz',
+  // melindaKatz style layer
+  var melindaLayer = map.addLayer({
+    'id': 'Katz',
     'type': 'fill',
     'source': {
       'type': 'geojson',
@@ -56,8 +69,9 @@ map.on('load', function() {
     },
   });
 
-  map.addLayer({
-    'id': 'Total Votes Cast',
+  // totalVote style layer
+  var totalVoteLayer = map.addLayer({
+    'id': 'Total',
     'type': 'fill',
     'source': {
       'type': 'geojson',
@@ -139,34 +153,23 @@ map.on('load', function() {
   //   }
   // });
 
-  var toggleableLayerIds = [ 'Total Votes Cast', 'Percentage of Vote for Tiffany Caban', 'Percentage of Vote for Melinda Katz' ];
+  // var radioButton = document.getElementById('layerToggle');
 
-  for (var i = 0; i < toggleableLayerIds.length; i++) {
-  var id = toggleableLayerIds[i];
+  var radioButton = $("layerToggle")
 
-  var link = document.createElement('a');
-  link.href = '#';
-  link.className = 'active';
-  link.textContent = id;
-
-  link.onclick = function (e) {
-  var clickedLayer = this.textContent;
-  e.preventDefault();
-  e.stopPropagation();
-
-  var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-
-  if (visibility === 'visible') {
-  map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-  this.className = '';
-  } else {
-  this.className = 'active';
-  map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-  }
-  };
-
-  var layers = document.getElementById('layerToggle');
-  layers.appendChild(link);
-  }
-
+  radioButton.on("click", function(){
+    if (radioButton.value === " Total Votes Cast " ) {
+        totalVoteLayer.bringToFront();
+        tiffanyLayer.bringToBack();
+        melindaLayer.bringToBack();
+    } if (radioButton.value === " Percentage of Vote for Tiffany Caban ") {
+        tiffanyLayer.bringToFront();
+        totalVoteLayer.bringToBack();
+        melindaLayer.bringToBack();
+    } if (radioButton.value === " Percentage of Vote for Melinda Katz ") {
+        melindaLayer.bringToFront();
+        totalVoteLayer.bringToBack();
+        tiffanyLayer.bringToBack();
+    }
+  })
 });

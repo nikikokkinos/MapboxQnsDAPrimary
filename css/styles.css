@@ -75,18 +75,19 @@ p {
 }
 
 #layerToggle {
-  background: #fff;
+  background-color: #ffffff;
   position: absolute;
   z-index: 1;
   top: 10px;
-  right: 10px;
+  right: 40%;
+  padding: 2px;
   border-radius: 3px;
-  width: 120px;
+  width: 180px;
   border: 1px solid rgba(0,0,0,0.4);
   font-family: 'Open Sans', sans-serif;
 }
 
-#layerToggle a {
+/* #layerToggle a {
   font-size: 13px;
   color: #404040;
   display: block;
@@ -114,4 +115,4 @@ p {
 
 #layerToggle a.active:hover {
   background: #3074a4;
-}
+} */
