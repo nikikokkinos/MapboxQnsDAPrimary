@@ -22,9 +22,9 @@ var sourceUrl = 'https://raw.githubusercontent.com/nikikokkinos/Data/master/Quee
 map.on('load', function() {
 
   map.getCanvas().style.cursor = 'default';
-  
+
   // tiffanyCaban style layer
-  var tiffanyLayer = map.addLayer({
+  map.addLayer({
     'id': 'Caban',
     'type': 'fill',
     'source': {
@@ -46,8 +46,10 @@ map.on('load', function() {
     },
   });
 
+  $('#Caban').hide();
+
   // melindaKatz style layer
-  var melindaLayer = map.addLayer({
+  map.addLayer({
     'id': 'Katz',
     'type': 'fill',
     'source': {
@@ -69,8 +71,10 @@ map.on('load', function() {
     },
   });
 
+  $('#Katz').hide();
+
   // totalVote style layer
-  var totalVoteLayer = map.addLayer({
+  map.addLayer({
     'id': 'Total',
     'type': 'fill',
     'source': {
@@ -92,7 +96,7 @@ map.on('load', function() {
       }
     },
   });
-
+  //
   // var layers = ['0', '0-30', '30-50', '50-70', '70-100', '100-125', '125+'];
   // var colors = ['#FFFFFF', '#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#de2d26', '#a50f15'];
   //
@@ -155,21 +159,27 @@ map.on('load', function() {
 
   // var radioButton = document.getElementById('layerToggle');
 
-  var radioButton = $("layerToggle")
+  // $('#'+openaddress)
 
-  radioButton.on("click", function(){
-    if (radioButton.value === " Total Votes Cast " ) {
-        totalVoteLayer.bringToFront();
-        tiffanyLayer.bringToBack();
-        melindaLayer.bringToBack();
-    } if (radioButton.value === " Percentage of Vote for Tiffany Caban ") {
-        tiffanyLayer.bringToFront();
-        totalVoteLayer.bringToBack();
-        melindaLayer.bringToBack();
-    } if (radioButton.value === " Percentage of Vote for Melinda Katz ") {
-        melindaLayer.bringToFront();
-        totalVoteLayer.bringToBack();
-        tiffanyLayer.bringToBack();
+  var radioButton = $("#layerToggle")
+
+  radioButton.on("click", function () {
+    if (document.getElementById('total').checked) {
+      console.log('total');
+        $('#Total').show();
+        $('#Caban').hide();
+        $('#Katz').hide();
+    } if (document.getElementById('tiffany').checked) {
+      console.log('caban');
+        $('#Caban').show();
+        $('#Total').hide();
+        $('#Katz').hide();
+    } if (document.getElementById('melinda').checked) {
+      console.log('katz');
+        $('#Katz').show();
+        $('#Total').hide();
+        $('#Caban').hide();
     }
   })
+
 });
