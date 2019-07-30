@@ -24,7 +24,7 @@ map.on('load', function() {
   map.getCanvas().style.cursor = 'default';
 
   // tiffanyCaban style layer
-  map.addLayer({
+  var cabanLayer = map.addLayer({
     'id': 'Caban',
     'type': 'fill',
     'source': {
@@ -46,7 +46,7 @@ map.on('load', function() {
     },
   });
 
-  $('#Caban').hide();
+  // map.removeLayer('Caban');
 
   // melindaKatz style layer
   map.addLayer({
@@ -71,7 +71,7 @@ map.on('load', function() {
     },
   });
 
-  $('#Katz').hide();
+  // map.removeLayer('Katz');
 
   // totalVote style layer
   map.addLayer({
@@ -96,7 +96,7 @@ map.on('load', function() {
       }
     },
   });
-  //
+
   // var layers = ['0', '0-30', '30-50', '50-70', '70-100', '100-125', '125+'];
   // var colors = ['#FFFFFF', '#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#de2d26', '#a50f15'];
   //
@@ -157,29 +157,21 @@ map.on('load', function() {
   //   }
   // });
 
-  // var radioButton = document.getElementById('layerToggle');
-
-  // $('#'+openaddress)
-
+  // creating a var that selects the radio buttons created in html
   var radioButton = $("#layerToggle")
 
+  // creating function that changes z-index of layer based on radio button selection
   radioButton.on("click", function () {
     if (document.getElementById('total').checked) {
       console.log('total');
-        $('#Total').show();
-        $('#Caban').hide();
-        $('#Katz').hide();
+        map.moveLayer('Total');
     } if (document.getElementById('tiffany').checked) {
       console.log('caban');
-        $('#Caban').show();
-        $('#Total').hide();
-        $('#Katz').hide();
+        map.moveLayer('Caban');
     } if (document.getElementById('melinda').checked) {
       console.log('katz');
-        $('#Katz').show();
-        $('#Total').hide();
-        $('#Caban').hide();
+        map.moveLayer('Katz');
     }
-  })
+  });
 
 });
