@@ -24,7 +24,7 @@ map.on('load', function() {
   map.getCanvas().style.cursor = 'default';
 
   // tiffanyCaban style layer
-  var cabanLayer = map.addLayer({
+  map.addLayer({
     'id': 'Caban',
     'type': 'fill',
     'source': {
@@ -45,8 +45,6 @@ map.on('load', function() {
       }
     },
   });
-
-  // map.removeLayer('Caban');
 
   // melindaKatz style layer
   map.addLayer({
@@ -70,8 +68,6 @@ map.on('load', function() {
       }
     },
   });
-
-  // map.removeLayer('Katz');
 
   // totalVote style layer
   map.addLayer({
@@ -97,65 +93,88 @@ map.on('load', function() {
     },
   });
 
-  // var layers = ['0', '0-30', '30-50', '50-70', '70-100', '100-125', '125+'];
-  // var colors = ['#FFFFFF', '#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#de2d26', '#a50f15'];
-  //
-  // for (i = 0; i < layers.length; i++) {
-  // var layer = layers[i];
-  // var color = colors[i];
-  // var item = document.createElement('div');
-  // var key = document.createElement('span');
-  // key.className = 'legend-key';
-  // key.style.backgroundColor = color;
-  //
-  // var value = document.createElement('span');
-  // value.innerHTML = layer;
-  // item.appendChild(key);
-  // item.appendChild(value);
-  // legend.appendChild(item);
-  // }
-  //
-  // var layers = ['0%', '0%-25%', '25%-50%', '50%-75%', '75%-90%', '90%-95%', '95% +'];
-  // var colors = ['#FFFFFF', '#fee5d9', '#fcbba1', '#fb6a4a', '#de2d26', '#a50f15'];
-  //
-  // for (i = 0; i < layers.length; i++) {
-  // var layer = layers[i];
-  // var color = colors[i];
-  // var item = document.createElement('div');
-  // var key = document.createElement('span');
-  // key.className = 'legend-key';
-  // key.style.backgroundColor = color;
-  //
-  // var value = document.createElement('span');
-  // value.innerHTML = layer;
-  // item.appendChild(key);
-  // item.appendChild(value);
-  // legend.appendChild(item);
-  // }
-  //
-  // map.on('mousemove', function(e) {
-  //   var EDs = map.queryRenderedFeatures(e.point, {
-  //     layers: ['totalVotes']
-  //   });
-  //
-  //   if (EDs.length > 0) {
-  //     document.getElementById('pd').innerHTML = '<h3><strong>' + EDs[0].properties.ElectDist + '</strong></h3><p><strong><em>' + EDs[0].properties.Refactored_Total_Votes_ED + '</strong> votes cast</em></p>';
-  //   } else {
-  //     document.getElementById('pd').innerHTML = '<p>Hover over an Election District!</p>';
-  //   }
-  // });
-  //
-  // map.on('mousemove', function(e) {
-  //   var cabanEDs = map.queryRenderedFeatures(e.point, {
-  //     layers: ['cabanVotePrcnt']
-  //   });
-  //
-  //   if (cabanEDs.length > 0) {
-  //     document.getElementById('pd').innerHTML = '<h3><strong>' + EDs[0].properties.ElectDist + '</strong></h3><p><strong><em>' + EDs[0].properties.Refactored_Caban_VotePrcnt + '</strong>% of votes cast</em></p>';
-  //   } else {
-  //     document.getElementById('pd').innerHTML = '<p>Hover over an Election District!</p>';
-  //   }
-  // });
+  map.on('mousemove', function () {
+    if (document.getElementById('total').checked) {
+      // creating variables to hold quantities & colors of Total layer
+      var totalLayers = ['0', '0-30', '30-50', '50-70', '70-100', '100-125', '125+'];
+      var totalColors = ['#FFFFFF', '#fee5d9', '#fcbba1', '#fc9272', '#fb6a4a', '#de2d26', '#a50f15'];
+
+      // creating a loop function to run through the Total layer
+      for (i = 0; i < totalLayers.length; i++) {
+        var totalLayer = totalLayers[i];
+        var totalColor = totalColors[i];
+        var item = document.createElement('div');
+        var key = document.createElement('span');
+        key.className = 'legend-key';
+        key.style.backgroundColor = totalColor;
+
+        var value = document.createElement('span');
+        value.innerHTML = totalLayer;
+        item.appendChild(key);
+        item.appendChild(value);
+        legend.appendChild(item);
+      }
+
+      map.on('mousemove', function totalFunction(e) {
+        var EDs = map.queryRenderedFeatures(e.point, {
+          layers: ['Total']
+        });
+
+        if (EDs.length > 0) {
+          document.getElementById('pd').innerHTML = '<h3><strong>' + EDs[0].properties.ElectDist + '</strong></h3><p><strong><em>' + EDs[0].properties.Refactored_Total_Votes_ED + '</strong> votes cast</em></p>';
+        } else {
+          document.getElementById('pd').innerHTML = '<p>Hover over an Election District!</p>';
+        }
+      })
+  }
+
+    if (document.getElementById('tiffany').checked) {
+    //   var candidateLayers = ['0', '0-25', '25-50', '50-75', '75-90', '90-95', '95 +'];
+    //   var candidateColors = ['#FFFFFF', '#fee5d9', '#fcbba1', '#fb6a4a', '#de2d26', '#a50f15'];
+    //   //
+    //   for (i = 0; i < candidateLayers.length; i++) {
+    //     var candidateLayer = candidateLayers[i];
+    //     var candidateColor = candidateColors[i];
+    //     var item = document.createElement('div');
+    //     var key = document.createElement('span');
+    //     key.className = 'legend-keyCandidate';
+    //     key.style.backgroundColor = candidateColor;
+    // }
+    //
+    //   var value = document.createElement('span');
+    //   value.innerHTML = candidateLayer;
+    //   item.appendChild(key);
+    //   item.appendChild(value);
+    //   legendCandidate.appendChild(item);
+
+      map.on('mousemove', function candidateFunction(e) {
+        var cabanEDs = map.queryRenderedFeatures(e.point, {
+          layers: ['Caban']
+        });
+
+        if (cabanEDs.length > 0) {
+          document.getElementById('pd').innerHTML = '<h3><strong>' + cabanEDs[0].properties.ElectDist + '</strong></h3><p><strong><em>' + cabanEDs[0].properties.Refactored_Caban_VotePrcnt + '</strong>% of votes cast</em></p>';
+        } else {
+          document.getElementById('pd').innerHTML = '<p>Hover over an Election District!</p>';
+        }
+      });
+    }
+
+    if (document.getElementById('melinda').checked) {
+
+      map.on('mousemove', function candidateFunction(e) {
+        var katzEDs = map.queryRenderedFeatures(e.point, {
+          layers: ['Katz']
+        });
+
+        if (katzEDs.length > 0) {
+          document.getElementById('pd').innerHTML = '<h3><strong>' + katzEDs[0].properties.ElectDist + '</strong></h3><p><strong><em>' + katzEDs[0].properties.Refactored_Katz_VotePrcnt + '</strong>% of votes cast</em></p>';
+        } else {
+          document.getElementById('pd').innerHTML = '<p>Hover over an Election District!</p>';
+        }
+      });
+    }
+  })
 
   // creating a var that selects the radio buttons created in html
   var radioButton = $("#layerToggle")
@@ -163,13 +182,10 @@ map.on('load', function() {
   // creating function that changes z-index of layer based on radio button selection
   radioButton.on("click", function () {
     if (document.getElementById('total').checked) {
-      console.log('total');
         map.moveLayer('Total');
     } if (document.getElementById('tiffany').checked) {
-      console.log('caban');
         map.moveLayer('Caban');
     } if (document.getElementById('melinda').checked) {
-      console.log('katz');
         map.moveLayer('Katz');
     }
   });
