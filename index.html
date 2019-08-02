@@ -10,16 +10,8 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
 
-  <!-- Mapbox GL JS directions -->
-  <!-- <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script> -->
-  <!-- <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' /> -->
-
   <!-- My CSS -->
   <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Mapbox GL JS geocoder style & script -->
-  <!-- <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css' type='text/css' /> -->
-  <!-- <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js'></script> -->
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -27,11 +19,15 @@
 
 <body>
   <!-- radio button -->
-  <form action="" id="layerToggle">
-    <input type="radio" name="layer" id="total" checked> Total Votes Cast<br>
-    <input type="radio" name="layer" id="tiffany"> Tiffany Caban Vote %<br>
-    <input type="radio" name="layer" id="melinda"> Melinda Katz Vote %
-  </form>
+
+  <!-- <div id="layerToggleContainer"> -->
+    <div action="" id="layerToggle">
+      <input type="radio" name="layer" id="total" checked> Total Votes Cast<br>
+      <input type="radio" name="layer" id="tiffany"> Tiffany Caban Vote %<br>
+      <input type="radio" name="layer" id="melinda"> Melinda Katz Vote %<br>
+      <input type="checkbox" name="overlay" id="ad"> Assembly Districts
+    </div>
+  <!-- </div> -->
 
   <!-- instantiating map -->
   <div id='map'></div>
