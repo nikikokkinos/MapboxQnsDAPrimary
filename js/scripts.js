@@ -44,6 +44,19 @@ map.on('load', function() {
       },
   });
 
+  map.on('click', 'AssemblyDistricts', function(e) {
+
+  // var coordinates = e.features[0].geometry.coordinates.slice();
+  var assemblyWebsite = e.features[0].properties.QueensADs_URL;
+  var districtNumber = e.features[0].properties.AssemDist;
+
+  new mapboxgl.Popup({
+    closeButton: false,
+  }).setLngLat(e.lngLat)
+  .setHTML('Assembly District' + ' ' + districtNumber + ' ' + '<br >' + '<a href="' + assemblyWebsite + '"  target="_blank" >Visit Website</a>')
+  .addTo(map);
+  });
+
   // tiffanyCaban style layer
   map.addLayer({
     'id': 'Caban',
